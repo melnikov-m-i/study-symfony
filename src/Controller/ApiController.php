@@ -5,10 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApiController extends AbstractController
 {
@@ -51,15 +47,20 @@ class ApiController extends AbstractController
     */
     public function getQuntityGoodsInLocation($locationId)
     {
-        $file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/test_data/catalog_goods.json');
-        $goods = json_encode($file, true);
+        $catalogLocations = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/test_data/catalog_locations.json');
+        $locations = json_decode($catalogLocations, true);
+        $catalogGoods = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/test_data/catalog_goods.json');
+        $goods = json_encode($catalogGoods, true);
         $data = [];
 
-        foreach ($goods as $item) {
-            $data[$item['id']] = random_int(0, 100);
+        if(empty($locations) && array_search($locationId, array_column($locations, 'id'))) {
+            foreach ($goods as $item) {
+                $data[$item['id']] = random_int(0, 100);
+            }
         }
 
         $data = json_encode($data);
+
         $response = new Response();
         $response->setContent($data);
         $response->headers->set('Content-Type', 'application/json');
