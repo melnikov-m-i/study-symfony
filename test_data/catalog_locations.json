@@ -2,31 +2,31 @@
   {
     "id": "1",
     "name": "Рыбинск",
-    "latitude": "58.13853",
-    "longitude": "38.573586"
+    "latitude": "58.0446",
+    "longitude": "38.84259"
   },
   {
     "id": "2",
     "name": "Рязань",
-    "latitude": "54.619886",
-    "longitude": "39.744954"
+    "latitude": "54.6269",
+    "longitude": "39.6916"
   },
   {
     "id": "3",
     "name": "Самара",
-    "latitude": "53.195533",
-    "longitude": "50.101801"
+    "latitude": "53.195522",
+    "longitude": "50.101819"
   },
   {
     "id": "4",
     "name": "Саратов",
-    "latitude": "51.531528",
-    "longitude": "46.03582"
+    "latitude": "51.533103",
+    "longitude": "46.034158"
   },
   {
     "id": "5",
     "name": "Сочи",
-    "latitude": "43.581509",
-    "longitude": "39.722882"
+    "latitude": "43.585525",
+    "longitude": "39.723062"
   }
 ]

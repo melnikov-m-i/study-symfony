@@ -13,7 +13,7 @@ class ApiController extends AbstractController
      */
     public function getCatalogLocations()
     {
-        $file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/test_data/catalog_locations.json');
+        $file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../test_data/catalog_locations.json');
 
         if ($file === false) {
             $file = json_encode([]);
@@ -30,7 +30,7 @@ class ApiController extends AbstractController
     */
     public function getCatalogGoods()
     {
-        $file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/test_data/catalog_goods.json');
+        $file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../test_data/catalog_goods.json');
 
         if ($file === false) {
             $file = json_encode([]);
@@ -43,17 +43,20 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/api/quantity-goods-location/{locationId</d+>}", name="app_api_quantity_goods_location")
+     * @Route(
+     *     "/api/quantity-goods-location/{locationId}",
+     *     name="app_api_quantity_goods_location",
+     *     requirements={"locationId"="\d+"})
     */
-    public function getQuntityGoodsInLocation($locationId)
+    public function getQuantityGoodsInLocation($locationId)
     {
-        $catalogLocations = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/test_data/catalog_locations.json');
+        $catalogLocations = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../test_data/catalog_locations.json');
         $locations = json_decode($catalogLocations, true);
-        $catalogGoods = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/test_data/catalog_goods.json');
-        $goods = json_encode($catalogGoods, true);
+        $catalogGoods = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../test_data/catalog_goods.json');
+        $goods = json_decode($catalogGoods, true);
         $data = [];
 
-        if(empty($locations) && array_search($locationId, array_column($locations, 'id'))) {
+        if(!empty($locations) && array_search($locationId, array_column($locations, 'id')) !== false) {
             foreach ($goods as $item) {
                 $data[$item['id']] = random_int(0, 100);
             }
